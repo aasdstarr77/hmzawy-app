@@ -1,0 +1,2 @@
+import {Router} from 'express';import {authenticate} from '../../middlewares/auth.middleware.js';import {requireAdmin} from '../../middlewares/admin.middleware.js';import {createTicket,getTicket,listTickets,updateStatus} from './workshop.controller.js';
+const router=Router();router.get('/receipt/:receipt',getTicket);router.use(authenticate,requireAdmin);router.get('/',listTickets);router.post('/',createTicket);router.patch('/:id/status',updateStatus);export default router;
