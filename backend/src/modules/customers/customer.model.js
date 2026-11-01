@@ -1,0 +1,1 @@
+import mongoose from 'mongoose';const schema=new mongoose.Schema({name:{type:String,required:true},phone:{type:String,required:true,unique:true,index:true},addresses:[mongoose.Schema.Types.Mixed],isBlocked:{type:Boolean,default:false}},{timestamps:true});export const Customer=mongoose.model('Customer',schema);
