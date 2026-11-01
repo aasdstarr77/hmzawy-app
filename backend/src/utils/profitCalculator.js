@@ -1,0 +1,1 @@
+export function calculateProfit({revenuePiasters=0,partsCostPiasters=0,technicianCommissionPiasters=0,otherCostPiasters=0}){return Math.round(revenuePiasters-partsCostPiasters-technicianCommissionPiasters-otherCostPiasters);}
