@@ -1,38 +1,24 @@
 # حمزاوي سات | Hamzawy Sat
 
-نظام إدارة خدمات الدش والرسيفرات وكاميرات المراقبة وصيانة الشاشات.
+نظام رقمي لخدمات الدش والرسيفرات وكاميرات المراقبة وصيانة الشاشات.
 
-> خدمتك في بيتك بأعلى جودة.
+**الشعار:** خدمتك في بيتك بأعلى جودة.
 
-هذا المستودع هو نقطة البداية الرسمية للمشروع. يتضمن تطبيق Android أصليًا بـ Kotlin وJetpack Compose، وخلفية Node.js/Express، وتوثيق API، وإعداد بناء APK آليًا عبر GitHub Actions.
-
-## قواعد تشغيل أساسية
-- نطاق الخدمة: القاهرة الكبرى.
-- لا توجد خدمة استلام أو توصيل أو شحن للأجهزة؛ عميل الورشة يحضر الجهاز ويستلمه بنفسه.
-- رقم الورشة بصيغة `HS-YYYY-NNN` يولّد من الخادم باستخدام عدّاد ذري وفهرس فريد.
-- حالات الورشة ست حالات ثابتة كما هو موثق في `docs/WORKFLOW.md`.
-- لا تضع مفاتيح أو كلمات مرور أو ملفات keystore في Git.
-
-## المتطلبات
-- Android Studio حديث وJDK 17 وAndroid SDK 35.
-- Node.js 20+ وMongoDB.
+## قواعد التشغيل
+- نطاق الخدمة القاهرة الكبرى.
+- لا يوجد استلام أو توصيل أو شحن للأجهزة؛ العميل يحضر الجهاز للورشة ويستلمه بنفسه.
+- رقم الورشة HS-YYYY-NNN يولد من الخادم بعداد ذري سنوي وفهرس فريد.
+- حالات الورشة ست حالات ثابتة موثقة في docs/WORKFLOW.md.
+- لا تضع أسرارًا أو ملفات keystore في المستودع.
 
 ## بناء Android
-```bash
-./gradlew :app:assembleDebug
-```
-الناتج: `app/build/outputs/apk/debug/app-debug.apk`.
+يتطلب Android Studio أو Android SDK 35 وJDK 17 وGradle 8.9. نفّذ: gradle :app:assembleDebug
 
 ## تشغيل Backend
-```bash
-cd backend
-cp .env.example .env
-npm install
-npm run dev
-```
+من مجلد backend: انسخ .env.example إلى .env، ثم اضبط بيانات MongoDB وJWT_SECRET، ونفّذ npm install ثم npm run dev. MongoDB transactions تتطلب Replica Set.
 
-## الإعدادات
-راجع `docs/SETUP.md` و`backend/.env.example`. عنوان API الافتراضي للتطوير قابل للتغيير من `local.properties` أو متغيرات Gradle، ولا تُضمّن الأسرار في المستودع.
+## إعداد التكاملات
+راجع docs/SETUP.md. OTP وFCM وWhatsApp وMaps وتخزين الصور تحتاج بيانات اعتماد من مزوديها قبل تشغيلها في الإنتاج. نقاط OTP غير مفعلة افتراضيًا ولا تحاكي تحققًا أمنيًا.
 
-## الحالة
-المستودع في مرحلة التأسيس والبناء. البناء الآلي يتحقق من تجميع APK عند كل push إلى `main`، ولا يعني ذلك أن خدمات الإنتاج الخارجية (MongoDB/FCM/WhatsApp/Maps) مهيأة دون بيانات اعتمادها.
+## بناء APK آليًا
+كل push على main يشغل GitHub Actions لبناء Debug APK ورفعه كـ Artifact باسم hamzawy-sat-debug-apk. نجاح رفع الكود لا يعني نجاح البناء؛ راجع حالة Workflow قبل توزيع التطبيق.
