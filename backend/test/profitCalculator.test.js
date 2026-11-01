@@ -1,0 +1,1 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {calculateProfit} from '../src/utils/profitCalculator.js';test('calculates net profit in piasters',()=>{assert.equal(calculateProfit({revenuePiasters:10000,partsCostPiasters:2500,technicianCommissionPiasters:1000,otherCostPiasters:500}),6000);});
